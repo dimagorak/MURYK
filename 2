@@ -1,0 +1,41 @@
+"""
+Решить задачу, связанную с оценкой экономической деятельности группы предприятий на основе известных данных: 
+• название предприятий; 
+• плановый объем розничного товарооборота; 
+• фактический объем розничного товарооборота. 
+Требуется определить: a) процент выполнения плана каждым предприятием; b) количество предприятий, 
+недовыполнивших план на 10% и более; c) наименьший плановый товарооборот; 
+d) упорядочить предприятия по убыванию планового товарооборота.
+"""
+
+company = {'Google' : [1450, 725], 'Yandex' : [3500, 3750], 'LugaNova' : [9000, 25]}
+my_dic = {}
+all_keys = company.keys()
+underfulfilled = 0
+product_min = 0
+sorted_plan = []
+
+for key in all_keys:
+    values = company.get(key)
+    percent_complete = values[1]*100 / values[0]
+    print(key, ':', percent_complete, end=';\n')
+    
+    if percent_complete <= 90:
+        underfulfilled += 1
+        
+    if product_min == 0:
+        product_min = values[0]
+        
+    elif product_min > values [0]:
+        product_min = values[0]
+        
+    my_dic[values[0]] = key
+    
+print(underfulfilled, ' enterprise(s) comlplete(s) 90 % (or less) of plan')
+print(product_min, ' - наименьший плановый товарооборот')
+
+sorted_plan = sorted(my_dic.keys())
+sorted_plan.reverse()
+
+for key in sorted_plan:
+    print(my_dic[key], '-', key , end='; ')
